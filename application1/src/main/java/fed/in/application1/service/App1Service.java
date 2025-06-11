@@ -19,21 +19,30 @@ public class App1Service {
        } catch (Exception e){
     System.out.println("Failed to send message");
 }
-
     }
 
     @Async
-    public void  sendNotificationMsgToApp2Delay(){
-        for (int i=0;i<15;i++){
+    public void sendNotificationMsgToApp2DelayAsync() {
+        for (int i = 0; i < 15; i++) {
             try {
                 String response = restTemplate.getForObject("http://localhost:8081/app2/message", String.class);
-                System.out.println("Message send from app1"+"-"+response+i);
+                System.out.println("Thread: " + Thread.currentThread().getName() +
+                        " | Message send from app1-" + response + " " + i);
                 Thread.sleep(3000);
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Failed to send message");
             }
         }
     }
 
+    @Async
+    public void callApp2Async(int i) {
+        String response = restTemplate.getForObject("http://localhost:8081/app2/message", String.class);
+        System.out.println("Message send from app1-" + response + " " + i);
+    }
 
 }
+
+
+
+
