@@ -22,5 +22,18 @@ public class App1Service {
 
     }
 
+    @Async
+    public void  sendNotificationMsgToApp2Delay(){
+        for (int i=0;i<15;i++){
+            try {
+                String response = restTemplate.getForObject("http://localhost:8081/app2/message", String.class);
+                System.out.println("Message send from app1"+"-"+response+i);
+                Thread.sleep(3000);
+            } catch (Exception e){
+                System.out.println("Failed to send message");
+            }
+        }
+    }
+
 
 }

@@ -12,10 +12,16 @@ public class App1Controller {
     private App1Service app1Service;
 
     @GetMapping("/app1")
-    public String App1Async(){
+    public String app1Async(){
         app1Service.sendMessageToApp2();
         return "Message send to App2";
     }
+
+    @GetMapping("/request")
+   public String app1AsyncDelay(){
+        app1Service.sendNotificationMsgToApp2Delay();
+        return "Message send to App2 Delay";
+}
 
 
 }
